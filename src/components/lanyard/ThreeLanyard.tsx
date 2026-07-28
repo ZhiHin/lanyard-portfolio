@@ -9,8 +9,13 @@ import { BallCollider, CuboidCollider, Physics, RigidBody, type RigidBodyProps, 
 import { MeshLineGeometry, MeshLineMaterial } from "meshline";
 import * as THREE from "three";
 
-const cardGLB = "/card.glb";
-const lanyardTexture = "/evolyst-lanyard-texture.png";
+// GitHub Pages serves this project from /lanyard-portfolio rather than the
+// domain root. Keep public assets under that same base path in production.
+const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const publicAsset = (path: string) => `${publicBasePath}${path}`;
+const cardGLB = publicAsset("/card.glb");
+const lanyardTexture = publicAsset("/evolyst-lanyard-texture.png");
+const cardTexturePath = publicAsset("/card-base-dark.png");
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
@@ -91,7 +96,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: { maxSpeed?: nu
   const segmentProps: any = { type: "dynamic" as RigidBodyProps["type"], canSleep: true, colliders: false, angularDamping: 4, linearDamping: 4 };
   const { nodes, materials } = useGLTF(cardGLB) as any;
   const texture = useTexture(lanyardTexture) as THREE.Texture;
-  const cardTexture = useTexture("/card-base-dark.png") as THREE.Texture;
+  const cardTexture = useTexture(cardTexturePath) as THREE.Texture;
   const [curve] = useState(() => new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()]));
   const [dragged, drag] = useState<false | THREE.Vector3>(false);
   const [hovered, hover] = useState(false);

@@ -3,6 +3,8 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useState } from "react";
 
+const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export function StableLanyard() {
   const [dragging, setDragging] = useState(false);
   const x = useMotionValue(0);
@@ -25,7 +27,7 @@ export function StableLanyard() {
         {Array.from({ length: 4 }, (_, index) => <span key={index} />)}
       </div>
       <div className="stable-lanyard-clip" aria-hidden="true"><i /><b /><span /></div>
-      <div className="stable-lanyard-card"><img src="/card-base-dark.png" alt="Prompt to Production event card" /></div>
+      <div className="stable-lanyard-card"><img src={`${publicBasePath}/card-base-dark.png`} alt="Evolyst Studio event card" /></div>
     </motion.div>
   </div>;
 }
