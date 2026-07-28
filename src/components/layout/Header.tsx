@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { navigation, personal } from "@/data/personal";
 
 export function Header() {
+  const resumePath = `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/resume.pdf`;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("#home");
@@ -24,8 +25,8 @@ export function Header() {
     <nav className="desktop-nav" aria-label="Primary navigation">
       {navigation.map(({ label, href }) => <a className={active === href ? "active" : ""} href={href} key={href}>{label}</a>)}
     </nav>
-    <a className="resume-link" href="/resume.pdf" download>Résumé <span aria-hidden>↗</span></a>
+    <a className="resume-link" href={resumePath} download>Résumé <span aria-hidden>↗</span></a>
     <button className="menu-toggle" type="button" onClick={() => setOpen(!open)} aria-label={open ? "Close navigation menu" : "Open navigation menu"} aria-expanded={open}>{open ? <X size={20} /> : <Menu size={20} />}</button>
-    {open && <nav className="mobile-nav" aria-label="Mobile navigation">{navigation.map(({ label, href }) => <a href={href} onClick={() => setOpen(false)} key={href}>{label}</a>)}<a href="/resume.pdf" download>Download résumé</a></nav>}
+    {open && <nav className="mobile-nav" aria-label="Mobile navigation">{navigation.map(({ label, href }) => <a href={href} onClick={() => setOpen(false)} key={href}>{label}</a>)}<a href={resumePath} download>Download résumé</a></nav>}
   </header>;
 }
