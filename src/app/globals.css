@@ -7,6 +7,7 @@
 @import "../styles/about.css";
 @import "../styles/journey.css";
 @import "../styles/arsenal.css";
+@import "../styles/work.css";
 
 @tailwind base;
 @tailwind components;

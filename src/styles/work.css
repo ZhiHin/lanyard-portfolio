@@ -1,0 +1,562 @@
+/* ------------------------------------------------------------------
+   Act 5 — The Work (sticky-stacked project cards, galleries, dialogs)
+   ------------------------------------------------------------------ */
+
+.work-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1rem, 1.6vw, 1.25rem);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-2);
+  overflow: hidden;
+}
+
+.work-card.is-reverse .work-card-media {
+  order: 2;
+}
+
+.work-card-media {
+  position: relative;
+  min-height: 420px;
+  border-radius: calc(var(--radius-lg) - 8px);
+  overflow: hidden;
+}
+
+.work-card-copy {
+  display: grid;
+  align-content: center;
+  gap: var(--space-4);
+  padding: clamp(0.5rem, 2vw, 2rem) clamp(0.5rem, 2vw, 1.5rem) clamp(0.5rem, 2vw, 2rem) 0;
+}
+
+.work-card.is-reverse .work-card-copy {
+  padding-left: clamp(0.5rem, 2vw, 1.5rem);
+  padding-right: 0;
+}
+
+.work-number {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.work-number .eyebrow-number {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  letter-spacing: -0.02em;
+}
+
+.work-year {
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--ink-08);
+}
+
+.work-card h3 {
+  font-size: var(--step-3);
+  letter-spacing: -0.03em;
+}
+
+.work-description {
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 46ch;
+}
+
+.work-stack-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.work-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+/* Gallery frame — ported from the legacy stylesheet, re-skinned */
+.project-gallery {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #eef0f7, #dcdff0);
+  isolation: isolate;
+}
+
+.project-gallery.tint-hotel {
+  background: linear-gradient(135deg, #e7eef7, #c9d8ee);
+}
+
+.project-gallery.tint-console {
+  background: linear-gradient(135deg, #e9e7f7, #d0cbef);
+}
+
+.project-gallery.tint-dashboard {
+  background: linear-gradient(135deg, #e8eef4, #cbd8e4);
+}
+
+.project-gallery.tint-pos {
+  background: linear-gradient(135deg, #f7ebe6, #f3d3c4);
+}
+
+.project-gallery-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.project-gallery-image.is-mobile-screenshot {
+  object-fit: contain;
+  padding: 24px;
+}
+
+.gallery-expand {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  cursor: zoom-in;
+}
+
+.gallery-expand-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(20, 20, 26, 0.78);
+  color: var(--paper);
+  font-size: var(--step--1);
+  font-weight: 600;
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--dur-hover) var(--ease-out), transform var(--dur-hover) var(--ease-out);
+}
+
+.project-gallery:hover .gallery-expand-hint,
+.gallery-expand:focus-visible .gallery-expand-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-gallery-top,
+.project-gallery-controls {
+  position: absolute;
+  z-index: 3;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--step--1);
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.project-gallery-top {
+  top: 14px;
+}
+
+.project-gallery-top span {
+  padding: 6px 11px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--ink);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-1);
+}
+
+.project-gallery-top span:last-child {
+  background: rgba(20, 20, 26, 0.82);
+  color: var(--paper);
+}
+
+.project-gallery-controls {
+  bottom: 14px;
+}
+
+.project-gallery-controls > span {
+  padding: 6px 11px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-1);
+}
+
+.project-gallery-controls div {
+  display: flex;
+  gap: 6px;
+  pointer-events: auto;
+}
+
+.project-gallery-controls button {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  box-shadow: var(--shadow-1);
+  transition: background-color var(--dur-hover) var(--ease-out), color var(--dur-hover) var(--ease-out), transform var(--dur-hover) var(--ease-out);
+}
+
+.project-gallery-controls button:hover {
+  background: var(--indigo);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+
+.project-gallery-controls button:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: 2px;
+}
+
+/* Generic art for the portfolio card */
+.project-art-generic {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #eeeaff, #ffe6dc);
+}
+
+.project-orbit {
+  position: absolute;
+  width: 60%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px dashed var(--indigo-18);
+  animation: spin-slow 40s linear infinite;
+}
+
+.project-orbit.is-second {
+  width: 85%;
+  border-color: var(--coral-22);
+  animation-duration: 70s;
+  animation-direction: reverse;
+}
+
+.mock-window {
+  position: relative;
+  width: min(62%, 360px);
+  aspect-ratio: 16 / 10;
+  padding: 10px;
+  border-radius: 14px;
+  background: var(--paper);
+  box-shadow: var(--shadow-3);
+  display: grid;
+  grid-template-columns: repeat(3, 10px) 1fr;
+  align-content: start;
+  gap: 6px;
+}
+
+.mock-window i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ink-12);
+}
+
+.mock-window i:first-child {
+  background: var(--coral);
+}
+
+.mock-window b {
+  grid-column: 1 / -1;
+  height: 58%;
+  margin-top: 8px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--indigo-18), var(--coral-12));
+}
+
+.project-art-word {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--indigo);
+}
+
+/* Image carousel dialog */
+.image-carousel-dialog,
+.case-study-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-dialog);
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 56px);
+  background: rgba(20, 20, 26, 0.82);
+  backdrop-filter: blur(10px);
+  animation: dialog-fade 240ms var(--ease-out);
+}
+
+.image-carousel-dialog {
+  cursor: zoom-out;
+}
+
+.image-carousel-dialog-content {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 1440px);
+  max-height: 100%;
+  cursor: default;
+  animation: dialog-rise 360ms var(--ease-out);
+}
+
+.image-carousel-dialog-content > img {
+  max-width: 100%;
+  max-height: calc(100vh - clamp(36px, 8vw, 116px));
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+.image-carousel-dialog-content.is-portrait > img {
+  max-width: min(100%, 380px);
+}
+
+.image-dialog-close,
+.image-dialog-controls button,
+.case-study-close {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  box-shadow: var(--shadow-2);
+  transition: background-color var(--dur-hover) var(--ease-out), color var(--dur-hover) var(--ease-out), transform var(--dur-hover) var(--ease-out);
+}
+
+.image-dialog-close:hover,
+.image-dialog-controls button:hover,
+.case-study-close:hover {
+  background: var(--indigo);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+
+.image-dialog-close {
+  position: absolute;
+  z-index: 2;
+  top: 14px;
+  right: 14px;
+}
+
+.image-dialog-controls {
+  position: absolute;
+  z-index: 2;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--paper);
+  font-size: var(--step--1);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+.image-dialog-controls div {
+  display: flex;
+  gap: 8px;
+}
+
+/* Case study dialog */
+.case-study-dialog-content {
+  position: relative;
+  width: min(100%, 920px);
+  max-height: calc(100vh - 2 * clamp(16px, 4vw, 56px));
+  overflow: auto;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  border-radius: var(--radius-lg);
+  background: var(--porcelain);
+  box-shadow: var(--shadow-3);
+  animation: dialog-rise 360ms var(--ease-out);
+  overscroll-behavior: contain;
+}
+
+.case-study-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  z-index: 2;
+}
+
+.case-study-header {
+  display: grid;
+  gap: var(--space-3);
+  padding-right: 56px;
+  margin-bottom: var(--space-6);
+}
+
+.case-study-header > p:first-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.case-study-header > p:first-child span {
+  color: var(--indigo);
+}
+
+.case-study-header h2 {
+  font-size: var(--step-4);
+}
+
+.case-study-overview {
+  font-size: var(--step-1);
+  line-height: 1.5;
+}
+
+.case-study-focus {
+  padding: 12px 16px;
+  border-left: 3px solid var(--coral);
+  background: var(--coral-12);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.case-study-sections {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.case-study-sections section {
+  display: grid;
+  gap: var(--space-3);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-radius: var(--radius-md);
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+}
+
+.case-study-section-number {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 800;
+  color: var(--indigo);
+}
+
+.case-study-sections h3 {
+  font-size: var(--step-2);
+}
+
+.case-study-sections p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.case-study-sections ul {
+  display: grid;
+  gap: 8px;
+}
+
+.case-study-sections li {
+  position: relative;
+  padding-left: 22px;
+  line-height: 1.5;
+}
+
+.case-study-sections li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--mint);
+}
+
+.case-study-stack {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--hairline);
+}
+
+.case-study-stack span {
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-right: 6px;
+}
+
+.case-study-stack b {
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--paper);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .work-card {
+    grid-template-columns: 1fr;
+  }
+  .work-card.is-reverse .work-card-media {
+    order: 0;
+  }
+  .work-card-copy,
+  .work-card.is-reverse .work-card-copy {
+    padding: var(--space-3) var(--space-2) var(--space-4);
+  }
+  .work-card-media,
+  .project-gallery {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 620px) {
+  .work-card-media,
+  .project-gallery {
+    min-height: 240px;
+  }
+  .project-gallery-top {
+    display: none;
+  }
+  .image-dialog-close {
+    top: 10px;
+    right: 10px;
+  }
+}

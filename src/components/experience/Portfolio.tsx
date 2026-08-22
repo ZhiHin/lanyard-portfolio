@@ -10,7 +10,7 @@ import { ArsenalSection } from "@/components/sections/ArsenalSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { JourneySection } from "@/components/sections/JourneySection";
-import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import { WorkSection } from "@/components/sections/WorkSection";
 import { navigation } from "@/data/personal";
 
 type PortfolioProps = {
@@ -34,7 +34,7 @@ export function Portfolio({ entered, cardReleased }: PortfolioProps) {
       <AboutSection />
       <JourneySection />
       <ArsenalSection />
-      <ProjectsSection />
+      <WorkSection />
       <section className="act shell" id="beyond" aria-label="Beyond the code" />
       <ContactSection />
       <Footer />

@@ -1,12 +1,8 @@
 "use client";
 
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
-import { ImageCarouselDialog } from "./ImageCarouselDialog";
+import { ProjectGallery, type ProjectSlide } from "./ProjectGallery";
 
-const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
-const slides = [
+const slides: ProjectSlide[] = [
   { src: "/projects/novacore-admin-1.png", alt: "NovaCore admin sign-in screen" },
   { src: "/projects/novacore-admin-2.png", alt: "NovaCore business dashboard overview" },
   { src: "/projects/novacore-admin-3.png", alt: "NovaCore sales dashboard" },
@@ -16,27 +12,5 @@ const slides = [
 ];
 
 export function BusinessAdminGallery() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const activeSlide = slides[activeIndex];
-
-  const move = (direction: -1 | 1) => {
-    setActiveIndex((current) => (current + direction + slides.length) % slides.length);
-  };
-
-  return (
-    <div className="project-art dashboard-showcase" role="region" aria-label="Business Admin Dashboard screenshots">
-      <img className="project-gallery-image" src={`${publicBasePath}${activeSlide.src}`} alt={activeSlide.alt} />
-      <button className="gallery-expand" type="button" onClick={() => setIsExpanded(true)} aria-label="Open Business Admin Dashboard screenshots in a larger viewer" />
-      <div className="project-gallery-shade" aria-hidden="true" />
-      <div className="project-gallery-controls">
-        <span aria-live="polite">{String(activeIndex + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}</span>
-        <div>
-          <button type="button" onClick={() => move(-1)} aria-label="Show previous Business Admin Dashboard screenshot"><ChevronLeft size={17} /></button>
-          <button type="button" onClick={() => move(1)} aria-label="Show next Business Admin Dashboard screenshot"><ChevronRight size={17} /></button>
-        </div>
-      </div>
-      {isExpanded && <ImageCarouselDialog slides={slides} activeIndex={activeIndex} onChange={setActiveIndex} onClose={() => setIsExpanded(false)} />}
-    </div>
-  );
+  return <ProjectGallery slides={slides} label="Business Admin Dashboard screenshots" tags={["Enterprise systems", "NovaCore"]} className="tint-dashboard" />;
 }
