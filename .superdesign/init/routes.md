@@ -1,11 +1,17 @@
+# Routes
+
+## / (Home)
+- Entry: src/app/page.tsx
+- Layout: src/app/layout.tsx
+- Summary: Single-page portfolio with fixed navigation, interactive lanyard, selected work, image galleries, case studies and contact.
+
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { MotionProvider } from "@/components/motion/MotionProvider";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 
 export default function Home() {
-  return <main><MotionProvider /><Header /><HeroSection /><AboutSection /><ProjectsSection /><ContactSection /><Footer /></main>;
+  return <main><Header /><HeroSection /><AboutSection /><ProjectsSection /><ContactSection /><Footer /></main>;
 }

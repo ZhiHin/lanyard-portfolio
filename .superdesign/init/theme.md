@@ -1,3 +1,29 @@
+# Theme
+
+## Compact token summary
+- Colors: ivory #f5f2eb, paper #fcfbf8, ink #12120f, muted #68665e, line #d8d3c8, gold #aa8b56.
+- Display font: Iowan Old Style/Baskerville/Times. UI font: Avenir Next/Avenir/Segoe UI/Arial.
+- Layout: 1320px max width with 80px desktop, 46px tablet and 34px mobile gutters.
+- Breakpoints: 900px and 620px. Motion: Framer Motion and reduced-motion override.
+
+## Tailwind configuration
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  theme: {
+    extend: {
+      colors: { ink: "#11110f", ivory: "#f6f3ec", gold: "#a78349" },
+      fontFamily: { sans: ["var(--font-manrope)", "sans-serif"], serif: ["var(--font-cormorant)", "serif"] },
+    },
+  },
+  plugins: [],
+};
+
+export default config;
+
+
+## Global CSS
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -82,76 +108,3 @@ a { color: inherit; text-decoration: none; } button { font: inherit; } ::selecti
 /* Project case studies */
 .case-study-trigger { display: flex; gap: 6px; align-items: center; padding: 0 0 4px; border: 0; border-bottom: 1px solid var(--ink); color: var(--ink); background: transparent; font-size: 10px; cursor: pointer; }.case-study-trigger:hover { color: var(--gold); border-color: var(--gold); }.case-study-trigger:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }.case-study-dialog { position: fixed; z-index: 1000; inset: 0; display: grid; place-items: center; padding: clamp(18px,4vw,58px); overflow-y: auto; background: rgba(8,15,20,.84); backdrop-filter: blur(9px); }.case-study-dialog-content { position: relative; width: min(100%,940px); padding: clamp(32px,6vw,72px); margin: auto; overflow: hidden; border: 1px solid rgba(18,18,15,.16); background: var(--paper); box-shadow: 0 26px 70px rgba(0,0,0,.34); }.case-study-close { position: absolute; top: 18px; right: 18px; display: grid; width: 40px; height: 40px; place-items: center; padding: 0; border: 1px solid var(--ink); border-radius: 50%; color: var(--ink); background: var(--paper); cursor: pointer; }.case-study-close:hover { color: var(--paper); background: var(--ink); }.case-study-close:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }.case-study-header { max-width: 690px; padding-right: 42px; }.case-study-header > p:first-child { display: flex; justify-content: space-between; margin: 0 0 22px; color: var(--gold); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }.case-study-header h2 { margin: 0; font-family: var(--serif); font-size: clamp(46px,7vw,78px); font-weight: 500; line-height: .9; letter-spacing: -.06em; }.case-study-overview { max-width: 610px; margin: 25px 0 0; color: var(--muted); font-size: 15px; line-height: 1.8; }.case-study-focus { margin: 18px 0 0; color: var(--ink); font-size: 11px; letter-spacing: .04em; }.case-study-sections { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; margin-top: clamp(38px,6vw,66px); }.case-study-sections section { padding-top: 17px; border-top: 1px solid var(--line); }.case-study-section-number { margin: 0 0 16px; color: var(--gold); font-size: 10px; letter-spacing: .1em; }.case-study-sections h3 { margin: 0 0 12px; font-family: var(--serif); font-size: 27px; font-weight: 500; letter-spacing: -.04em; }.case-study-sections section > p:not(.case-study-section-number) { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.75; }.case-study-sections ul { display: grid; gap: 7px; padding: 0; margin: 19px 0 0; list-style: none; }.case-study-sections li { position: relative; padding-left: 12px; color: var(--ink); font-size: 11px; line-height: 1.5; }.case-study-sections li::before { position: absolute; top: .57em; left: 0; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); content: ""; }.case-study-stack { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding-top: 26px; margin-top: 42px; border-top: 1px solid var(--line); }.case-study-stack span { margin-right: 5px; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .09em; }.case-study-stack b { padding: 7px 9px; border: 1px solid var(--line); border-radius: 999px; font-size: 10px; font-weight: 500; }
 @media (max-width: 760px) { .case-study-dialog { align-items: start; padding: 16px; }.case-study-dialog-content { padding: 55px 24px 28px; }.case-study-header { padding-right: 0; }.case-study-sections { grid-template-columns: 1fr; gap: 26px; }.case-study-stack { margin-top: 30px; }.case-study-close { top: 12px; right: 12px; width: 36px; height: 36px; } }
-/* Motion enhancement layer: transform/opacity-only motion keeps scrolling responsive. */
-html { scroll-padding-top: 126px; }
-.reading-progress { position: fixed; z-index: 100; top: 0; left: 0; width: 100%; height: 2px; background: var(--gold); transform-origin: 0 50%; pointer-events: none; }
-.hero { isolation: isolate; }
-.hero-ambient { position: absolute; z-index: -1; right: 17%; top: 25%; width: min(31vw, 440px); aspect-ratio: 1; border: 1px solid rgba(170,139,86,.18); border-radius: 50%; background: rgba(170,139,86,.025); pointer-events: none; }
-.hero-title-line { display: block; overflow: hidden; }
-.hero-title-line > span { display: block; }
-.hero-lanyard-wrap { position: absolute; z-index: 1; inset: 0; pointer-events: auto; }
-.hero-copy,.scroll-cue,.hero-index { z-index: 2; }
-.magnetic { --magnetic-x: 0px; --magnetic-y: 0px; transform: translate3d(var(--magnetic-x),var(--magnetic-y),0); transition: transform 220ms cubic-bezier(.22,1,.36,1), color 180ms ease, background 180ms ease, border-color 180ms ease; will-change: transform; }
-.button-dark.magnetic:hover { transform: translate3d(var(--magnetic-x),calc(var(--magnetic-y) - 2px),0); box-shadow: 0 12px 22px rgba(18,18,15,.14); }
-.text-link { position: relative; border-bottom: 0; }
-.text-link::after,.email-link::after,.case-study-trigger::after { position: absolute; right: 0; bottom: -1px; left: 0; height: 1px; background: currentColor; content: ""; transform: scaleX(.34); transform-origin: left; transition: transform 260ms cubic-bezier(.22,1,.36,1); }
-.text-link:hover::after,.email-link:hover::after,.case-study-trigger:hover::after { transform: scaleX(1); }
-.email-link { position: relative; border-bottom: 0; }
-.project-row { transform: translateZ(0); }
-.project-row .project-art,.console-subsection .console-gallery { transition: box-shadow 420ms cubic-bezier(.22,1,.36,1), transform 420ms cubic-bezier(.22,1,.36,1); }
-.project-row:hover .project-art,.console-subsection:hover .console-gallery { transform: translateY(-5px); box-shadow: 0 30px 55px rgba(25,24,19,.18); }
-.project-gallery-image,.console-gallery > img { transition: transform 700ms cubic-bezier(.22,1,.36,1); will-change: transform; }
-.project-art:hover .project-gallery-image,.console-gallery:hover > img { transform: scale(1.018); }
-.project-gallery-controls button svg,.console-gallery-controls button svg { transition: transform 180ms cubic-bezier(.22,1,.36,1); }
-.project-gallery-controls button:hover svg,.console-gallery-controls button:hover svg { transform: translateX(2px); }
-.project-gallery-controls button:first-child:hover svg,.console-gallery-controls button:first-child:hover svg { transform: translateX(-2px); }
-.projects-heading,.contact { position: relative; }
-.projects-heading::after,.contact::after { position: absolute; right: 0; bottom: -1px; left: 0; height: 1px; background: var(--ink); content: ""; transform: scaleX(0); transform-origin: left; animation: rule-reveal linear both; animation-timeline: view(); animation-range: entry 8% cover 24%; }
-.image-carousel-dialog,.case-study-dialog { animation: dialog-fade 240ms ease-out both; }
-.image-carousel-dialog-content,.case-study-dialog-content { animation: dialog-rise 360ms cubic-bezier(.22,1,.36,1) both; }
-@keyframes dialog-fade { from { opacity: 0; } to { opacity: 1; } }
-@keyframes dialog-rise { from { opacity: 0; transform: scale(.985) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-@keyframes rule-reveal { to { transform: scaleX(1); } }
-@supports (animation-timeline: view()) { .project-gallery-image,.console-gallery > img { animation: screenshot-parallax linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; } @keyframes screenshot-parallax { from { transform: scale(1.025) translateY(2%); } to { transform: scale(1.025) translateY(-2%); } } }
-@media (min-width: 1000px) { .project-row { min-height: min(68vw, 650px); } .project-copy { position: sticky; top: 150px; align-self: center; } .project-list > div { scroll-margin-top: 112px; } }
-@media (max-width: 900px) { .hero-lanyard-wrap { z-index: 1; } .hero-copy,.scroll-cue,.hero-index { z-index: 3; } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *,*::before,*::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } .reading-progress { display: none; } .hero-ambient { display: none; } .magnetic { transform: none !important; } .project-row:hover .project-art,.console-subsection:hover .console-gallery { transform: none; } }
-/* The lanyard becomes a normal, space-reserving section on smaller viewports. */
-@media (max-width: 900px) {
-  .hero-lanyard-wrap { position: relative; inset: auto; width: 100%; min-height: 600px; margin-top: -12px; }
-  .hero-ambient { display: none; }
-  .project-row:hover .project-art,.console-subsection:hover .console-gallery { transform: none; box-shadow: 0 24px 45px rgba(25,24,19,.12); }
-}
-@media (max-width: 620px) {
-  .hero-lanyard-wrap { min-height: 480px; margin-top: -2px; }
-  .hero-actions { flex-wrap: wrap; row-gap: 15px; }
-  .reading-progress { height: 2px; }
-}
-/* Fix interaction anchors and make the motion layer visible without affecting layout. */
-.hero-title-line { overflow: visible; }
-.case-study-trigger { position: relative; border-bottom: 0; }
-.case-study-trigger::after { bottom: -1px; transform: scaleX(1); }
-.project-actions { position: relative; z-index: 5; }
-.gallery-expand { transition: background-color 240ms ease; }
-.project-art:hover .gallery-expand,.console-gallery:hover .gallery-expand { background: rgba(255,255,255,.025); }
-.project-art::before,.console-gallery::after { position: absolute; z-index: 3; inset: 0; border: 1px solid transparent; content: ""; pointer-events: none; transition: border-color 320ms cubic-bezier(.22,1,.36,1), inset 320ms cubic-bezier(.22,1,.36,1); }
-.project-art:hover::before,.console-gallery:hover::after { inset: 10px; border-color: rgba(255,255,255,.42); }
-.project-art:hover .project-orbit { transform: scale(1.045) rotate(2deg); }
-.project-orbit { transition: transform 900ms cubic-bezier(.22,1,.36,1); }
-.project-gallery-controls button,.console-gallery-controls button { transition: transform 200ms cubic-bezier(.22,1,.36,1), background 200ms ease, color 200ms ease, border-color 200ms ease; }
-.project-gallery-controls button:hover,.console-gallery-controls button:hover { transform: translateY(-3px); }
-.project-row { will-change: transform, opacity; }
-@media (max-height: 760px) and (min-width: 901px) { .scroll-cue,.hero-index { display: none; } }
-@media (max-width: 900px) { .hero-title-line { overflow: visible; } .project-art::before,.console-gallery::after { display: none; } .project-row { clip-path: none !important; } }
-@media (prefers-reduced-motion: reduce) { .project-art::before,.console-gallery::after { transition: none; } .project-art:hover .project-orbit { transform: none; } }
-/* Keep project previews clean: no decorative white hover frame. */
-.project-art::before,.console-gallery::after { display: none !important; }
-
-
-/* Email is a primary contact action, so its underline stays full-width. */
-.email-link::after { transform: scaleX(1); }
-
-
-/* Preserve the original editorial dividers; remove added overlay rules. */
-.projects-heading::after,.contact::after { display: none; }
-
