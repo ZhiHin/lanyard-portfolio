@@ -8,6 +8,7 @@ import { SectionRail } from "@/components/motion/SectionRail";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { JourneySection } from "@/components/sections/JourneySection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { navigation } from "@/data/personal";
 
@@ -30,7 +31,7 @@ export function Portfolio({ entered, cardReleased }: PortfolioProps) {
       <Header />
       <HeroSection cardReleased={cardReleased} />
       <AboutSection />
-      <section className="act shell" id="journey" aria-label="Journey" />
+      <JourneySection />
       <section className="act shell" id="skills" aria-label="Skills" />
       <ProjectsSection />
       <section className="act shell" id="beyond" aria-label="Beyond the code" />

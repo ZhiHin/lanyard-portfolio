@@ -1,0 +1,159 @@
+/* ------------------------------------------------------------------
+   Act 3 — The Journey (scroll-scrubbed timeline)
+   ------------------------------------------------------------------ */
+
+.journey-track {
+  position: relative;
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding-block: var(--space-4);
+}
+
+.journey-path {
+  left: 50%;
+  translate: -50% 0;
+}
+
+.journey-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 64px 1fr;
+  align-items: center;
+}
+
+.journey-item.is-left .journey-card {
+  grid-column: 1;
+  justify-self: end;
+}
+
+.journey-item.is-right .journey-card {
+  grid-column: 3;
+  justify-self: start;
+}
+
+.journey-node {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  position: relative;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--porcelain);
+  border: 2px solid var(--indigo);
+  box-shadow: 0 0 0 6px var(--porcelain);
+  z-index: 1;
+}
+
+.journey-node i {
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: var(--indigo);
+  transform: scale(0);
+  transition: transform 500ms var(--ease-out) 250ms;
+}
+
+.journey-item:hover .journey-node i,
+.journey-item.is-now .journey-node i {
+  transform: scale(1);
+}
+
+.journey-item.is-now .journey-node {
+  border-color: var(--mint);
+}
+
+.journey-item.is-now .journey-node i {
+  background: var(--mint);
+}
+
+.journey-item.is-now .journey-node::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid var(--mint);
+  animation: pulse-ring 2s var(--ease-out) infinite;
+}
+
+.journey-card {
+  width: min(100%, 460px);
+  display: grid;
+  gap: var(--space-2);
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  transition: transform var(--dur-hover) var(--ease-out), box-shadow var(--dur-hover) var(--ease-out);
+}
+
+.journey-item:hover .journey-card {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-2);
+}
+
+.journey-card header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.journey-year {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--indigo);
+  font-variant-numeric: tabular-nums;
+}
+
+.journey-item.is-now .journey-year {
+  color: var(--mint);
+}
+
+.journey-tag {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--coral-12);
+  color: var(--coral);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.journey-card h3 {
+  font-size: var(--step-1);
+  line-height: 1.2;
+}
+
+.journey-org {
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.journey-body {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 620px) {
+  .journey-path {
+    left: 11px;
+    translate: 0 0;
+  }
+  .journey-item {
+    grid-template-columns: 22px 1fr;
+    column-gap: var(--space-4);
+  }
+  .journey-node {
+    grid-column: 1;
+    justify-self: start;
+    align-self: start;
+    margin-top: 18px;
+  }
+  .journey-item.is-left .journey-card,
+  .journey-item.is-right .journey-card {
+    grid-column: 2;
+    justify-self: stretch;
+    width: 100%;
+  }
+}

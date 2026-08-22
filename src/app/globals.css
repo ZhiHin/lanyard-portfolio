@@ -5,6 +5,7 @@
 @import "../styles/gate.css";
 @import "../styles/hero.css";
 @import "../styles/about.css";
+@import "../styles/journey.css";
 
 @tailwind base;
 @tailwind components;
