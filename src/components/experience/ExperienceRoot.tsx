@@ -4,12 +4,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { navigation } from "@/data/personal";
 import { CurtainTransition } from "./CurtainTransition";
 import { GateScreen } from "./GateScreen";
+import { ENTERED_KEY } from "./session";
 import { Portfolio } from "./Portfolio";
 
 export type Act = "gate" | "entering" | "portfolio";
-
-/** sessionStorage key — set once the visitor has passed the gate in this tab. */
-export const ENTERED_KEY = "fzh:entered";
 
 /** Milliseconds after the curtain starts before the card is released to fall. */
 const CARD_RELEASE_DELAY = 650;

@@ -1,13 +1,80 @@
 "use client";
 
-import { ArrowUpRight, Github, Linkedin } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowUpRight, Copy, Check, Github, Linkedin, FileDown } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Magnetic } from "@/components/motion/Magnetic";
-import { useMotionPreferences } from "@/components/motion/useMotionPreferences";
+import { Reveal } from "@/components/motion/Reveal";
+import { SplitText } from "@/components/motion/SplitText";
 import { personal } from "@/data/personal";
 
+/** Act 7 — Let's Talk. */
 export function ContactSection() {
-  const { reduced } = useMotionPreferences();
   const resumePath = `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/resume.pdf`;
-  return <section className="contact section-shell" id="contact"><motion.div initial={{ opacity: 0, y: reduced ? 0 : 26 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .3 }} transition={{ duration: reduced ? 0 : .7, ease: [0.22, 1, 0.36, 1] }}><p className="eyebrow">03 / Contact</p><div className="contact-grid"><h2>Have an idea<br /><em>worth building?</em></h2><div className="contact-copy"><p>I am open to software engineering opportunities, collaborations and meaningful digital projects.</p><Magnetic className="email-link" href={`mailto:${personal.email}`}>{personal.email} <ArrowUpRight size={21} /></Magnetic><div className="contact-links"><a href={personal.socials[0].href}><Github size={17} /> GitHub</a><a href={personal.socials[1].href}><Linkedin size={17} /> LinkedIn</a><a href={resumePath} download>Download résumé <ArrowUpRight size={15} /></a></div></div></div></motion.div></section>;
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (!copied) return;
+    const timer = window.setTimeout(() => setCopied(false), 1800);
+    return () => window.clearTimeout(timer);
+  }, [copied]);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(personal.email);
+      setCopied(true);
+    } catch {
+      // Clipboard can be unavailable; the mailto link remains the primary path.
+    }
+  };
+
+  return (
+    <section className="act contact" id="contact">
+      <span className="blob blob-indigo contact-blob-a" aria-hidden="true" />
+      <span className="blob blob-coral contact-blob-b" aria-hidden="true" />
+
+      <div className="shell">
+        <div className="contact-card surface">
+          <div className="contact-copy">
+            <Reveal>
+              <p className="eyebrow">
+                <span className="eyebrow-number">07</span> Let&apos;s talk
+              </p>
+            </Reveal>
+            <SplitText as="h2" text="Have an idea worth building?" highlight={[{ index: 3, className: "accent" }]} />
+            <Reveal delay={0.15}>
+              <p className="lead">I am open to software engineering opportunities, collaborations and meaningful digital projects. Now you know me — say hello.</p>
+            </Reveal>
+          </div>
+
+          <Reveal className="contact-actions" delay={0.2}>
+            <div className="contact-email">
+              <Magnetic className="btn btn-accent contact-email-link" href={`mailto:${personal.email}`}>
+                {personal.email} <ArrowUpRight size={18} />
+              </Magnetic>
+              <button type="button" className="contact-copy-btn" onClick={copyEmail} aria-live="polite" aria-label={copied ? "Email copied" : "Copy email address"}>
+                {copied ? <Check size={16} /> : <Copy size={16} />}
+                <span>{copied ? "Copied" : "Copy"}</span>
+              </button>
+            </div>
+
+            <div className="contact-links">
+              <a className="btn btn-ghost" href={personal.socials[0].href} target="_blank" rel="noreferrer">
+                <Github size={17} /> GitHub
+              </a>
+              <a className="btn btn-ghost" href={personal.socials[1].href} target="_blank" rel="noreferrer">
+                <Linkedin size={17} /> LinkedIn
+              </a>
+              <a className="btn btn-ghost" href={resumePath} download>
+                <FileDown size={17} /> Résumé
+              </a>
+            </div>
+
+            <p className="contact-meta">
+              <span className="hero-hint-dot" aria-hidden="true" /> {personal.availability} · {personal.location}
+            </p>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
 }
