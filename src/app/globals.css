@@ -6,6 +6,7 @@
 @import "../styles/hero.css";
 @import "../styles/about.css";
 @import "../styles/journey.css";
+@import "../styles/arsenal.css";
 
 @tailwind base;
 @tailwind components;

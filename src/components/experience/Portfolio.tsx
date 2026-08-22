@@ -6,6 +6,7 @@ import { CursorGlow } from "@/components/motion/CursorGlow";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { SectionRail } from "@/components/motion/SectionRail";
 import { AboutSection } from "@/components/sections/AboutSection";
+import { ArsenalSection } from "@/components/sections/ArsenalSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { JourneySection } from "@/components/sections/JourneySection";
@@ -32,7 +33,7 @@ export function Portfolio({ entered, cardReleased }: PortfolioProps) {
       <HeroSection cardReleased={cardReleased} />
       <AboutSection />
       <JourneySection />
-      <section className="act shell" id="skills" aria-label="Skills" />
+      <ArsenalSection />
       <ProjectsSection />
       <section className="act shell" id="beyond" aria-label="Beyond the code" />
       <ContactSection />
