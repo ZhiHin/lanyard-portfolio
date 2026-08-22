@@ -1,0 +1,292 @@
+/* ------------------------------------------------------------------
+   Act 6 — Beyond the Code (bento)
+   ------------------------------------------------------------------ */
+
+.beyond {
+  overflow: hidden;
+}
+
+.beyond-blob {
+  width: 48vmax;
+  height: 48vmax;
+  right: -18vmax;
+  top: 10%;
+}
+
+.beyond .shell {
+  position: relative;
+  z-index: 1;
+}
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  /* Every named area must be a rectangle or the browser drops the whole template. */
+  grid-template-areas:
+    "clock clock status status building building"
+    "stats stats stats stats building building"
+    "quote quote quote facts facts facts";
+  gap: var(--space-4);
+}
+
+.bento-cell {
+  display: grid;
+  min-height: 0;
+}
+
+.cell-clock {
+  grid-area: clock;
+}
+.cell-status {
+  grid-area: status;
+}
+.cell-building {
+  grid-area: building;
+}
+.cell-stats {
+  grid-area: stats;
+}
+.cell-quote {
+  grid-area: quote;
+}
+.cell-facts {
+  grid-area: facts;
+}
+
+.bento-tile {
+  position: relative;
+  display: grid;
+  align-content: space-between;
+  gap: var(--space-4);
+  min-height: 220px;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  overflow: hidden;
+}
+
+.bento-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.bento-label svg {
+  color: var(--coral);
+}
+
+.bento-foot {
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+}
+
+.bento-body {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.bento-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Clock */
+.live-clock {
+  display: grid;
+  gap: 4px;
+}
+
+.live-clock-time {
+  font-family: var(--font-display);
+  font-size: var(--step-5);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.live-clock-time small {
+  font-size: 0.4em;
+  font-weight: 600;
+  color: var(--indigo);
+  letter-spacing: -0.02em;
+}
+
+.live-clock-meta {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Status */
+.tile-status {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.tile-status .bento-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.tile-status .text-link {
+  color: var(--paper);
+  justify-self: start;
+}
+
+.status-headline {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.status-pulse {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--mint);
+}
+
+.status-pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--mint);
+  animation: pulse-ring 1.8s var(--ease-out) infinite;
+}
+
+/* Building */
+.tile-building {
+  background: linear-gradient(160deg, var(--paper), var(--indigo-10));
+}
+
+.tile-building h3 {
+  font-size: var(--step-2);
+}
+
+/* Stats */
+.tile-stats ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+
+.tile-stats li {
+  display: grid;
+  gap: 4px;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--porcelain);
+  border: 1px solid var(--hairline);
+}
+
+.tile-stats strong {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--indigo);
+}
+
+.tile-stats li:nth-child(2) strong {
+  color: var(--coral);
+}
+
+.tile-stats li:nth-child(3) strong {
+  color: var(--mint);
+}
+
+.tile-stats span {
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+/* Quote */
+.tile-quote {
+  background: var(--coral);
+  color: var(--paper);
+  border-color: var(--coral);
+}
+
+.tile-quote p {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* Facts */
+.tile-facts ul {
+  display: grid;
+  gap: 10px;
+}
+
+.tile-facts li {
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--porcelain);
+}
+
+.fact-emoji {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.fact-label {
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.fact-value {
+  font-weight: 700;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .bento {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "clock status"
+      "building building"
+      "stats stats"
+      "quote facts";
+  }
+}
+
+@media (max-width: 620px) {
+  .bento {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "clock"
+      "status"
+      "building"
+      "stats"
+      "quote"
+      "facts";
+  }
+  .tile-facts li {
+    grid-template-columns: 32px 1fr;
+  }
+  .fact-value {
+    grid-column: 2;
+    text-align: left;
+  }
+}

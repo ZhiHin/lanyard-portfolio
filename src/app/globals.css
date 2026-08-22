@@ -8,6 +8,7 @@
 @import "../styles/journey.css";
 @import "../styles/arsenal.css";
 @import "../styles/work.css";
+@import "../styles/beyond.css";
 
 @tailwind base;
 @tailwind components;

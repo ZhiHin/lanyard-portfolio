@@ -7,6 +7,7 @@ import { MotionProvider } from "@/components/motion/MotionProvider";
 import { SectionRail } from "@/components/motion/SectionRail";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ArsenalSection } from "@/components/sections/ArsenalSection";
+import { BeyondSection } from "@/components/sections/BeyondSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { JourneySection } from "@/components/sections/JourneySection";
@@ -35,7 +36,7 @@ export function Portfolio({ entered, cardReleased }: PortfolioProps) {
       <JourneySection />
       <ArsenalSection />
       <WorkSection />
-      <section className="act shell" id="beyond" aria-label="Beyond the code" />
+      <BeyondSection />
       <ContactSection />
       <Footer />
     </main>
