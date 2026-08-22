@@ -1,11 +1,5 @@
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { MotionProvider } from "@/components/motion/MotionProvider";
-import { HeroSection } from "@/components/sections/HeroSection";
-import { AboutSection } from "@/components/sections/AboutSection";
-import { ProjectsSection } from "@/components/sections/ProjectsSection";
-import { ContactSection } from "@/components/sections/ContactSection";
+import { ExperienceRoot } from "@/components/experience/ExperienceRoot";
 
 export default function Home() {
-  return <main><MotionProvider /><Header /><HeroSection /><AboutSection /><ProjectsSection /><ContactSection /><Footer /></main>;
+  return <ExperienceRoot />;
 }

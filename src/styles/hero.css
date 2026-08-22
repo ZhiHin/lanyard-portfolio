@@ -1,0 +1,315 @@
+/* ------------------------------------------------------------------
+   Act 1 — The Reveal (hero) and the lanyard stage
+   ------------------------------------------------------------------ */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 72px;
+}
+
+.hero-blob-a {
+  width: 56vmax;
+  height: 56vmax;
+  top: -26vmax;
+  right: -14vmax;
+}
+
+.hero-blob-b {
+  width: 40vmax;
+  height: 40vmax;
+  bottom: -22vmax;
+  left: -12vmax;
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: center;
+  gap: clamp(1rem, 4vw, 4rem);
+  min-height: calc(100svh - 72px);
+}
+
+.hero-copy {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  padding-block: var(--space-8);
+}
+
+.hero-title {
+  display: grid;
+  gap: 0.05em;
+  font-size: var(--step-6);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  outline: none;
+}
+
+.hero-greeting {
+  display: block;
+  font-size: 0.42em;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--muted);
+}
+
+.hero-name {
+  display: block;
+}
+
+.hero-role {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.hero-role span {
+  color: var(--indigo);
+}
+
+.hero-role svg {
+  color: var(--coral);
+}
+
+.hero-summary {
+  max-width: 46ch;
+  color: var(--muted);
+  font-size: var(--step-1);
+  line-height: 1.55;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.hero-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.hero-hint-dot {
+  position: relative;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--mint);
+}
+
+.hero-hint-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--mint);
+  animation: pulse-ring 1.8s var(--ease-out) infinite;
+}
+
+/* The lanyard stage — the canvas fills this column */
+.hero-stage {
+  position: relative;
+  height: calc(100svh - 72px);
+  min-height: 620px;
+  max-height: 980px;
+}
+
+.three-lanyard,
+.stable-lanyard {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  touch-action: none;
+  user-select: none;
+  opacity: 0;
+  transform: translateY(-24px);
+  transition: opacity 600ms var(--ease-out), transform 900ms var(--ease-out);
+}
+
+.three-lanyard.is-released,
+.stable-lanyard {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.three-lanyard canvas {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+}
+
+.three-lanyard-loading {
+  opacity: 0;
+}
+
+/* Stable fallback */
+.stable-lanyard {
+  overflow: hidden;
+}
+
+.stable-lanyard-assembly {
+  position: absolute;
+  top: -10px;
+  left: calc(50% - 95px);
+  width: 190px;
+  height: 690px;
+  cursor: grab;
+  touch-action: none;
+  transform-origin: 50% 0;
+}
+
+.stable-lanyard-assembly:active {
+  cursor: grabbing;
+}
+
+.stable-lanyard-strap {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 14px);
+  width: 28px;
+  height: 485px;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 14px, rgba(255, 255, 255, 0.12) 14px 16px),
+    linear-gradient(90deg, #1b1b22, #2a2a33 45%, #1b1b22);
+  box-shadow: 7px 12px 14px rgba(20, 20, 26, 0.2);
+  pointer-events: none;
+}
+
+.stable-lanyard-strap span {
+  display: none;
+}
+
+.stable-lanyard-clip {
+  position: absolute;
+  top: 449px;
+  left: 71px;
+  width: 48px;
+  height: 72px;
+}
+
+.stable-lanyard-clip i,
+.stable-lanyard-clip b,
+.stable-lanyard-clip span {
+  position: absolute;
+  display: block;
+  background: linear-gradient(90deg, #9a9aa6, #eeeef2 45%, #8d8d99);
+  box-shadow: 4px 7px 9px rgba(20, 20, 26, 0.16);
+}
+
+.stable-lanyard-clip i {
+  top: 0;
+  left: 14px;
+  width: 19px;
+  height: 31px;
+  border-radius: 9px 9px 0 0;
+}
+
+.stable-lanyard-clip b {
+  top: 18px;
+  left: 4px;
+  width: 40px;
+  height: 37px;
+  border-radius: 4px 4px 8px 8px;
+}
+
+.stable-lanyard-clip span {
+  bottom: 0;
+  left: 16px;
+  width: 15px;
+  height: 29px;
+  border-radius: 0 0 4px 4px;
+}
+
+.stable-lanyard-card {
+  position: absolute;
+  top: 523px;
+  left: 20px;
+  width: 150px;
+  aspect-ratio: 0.72;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 9px;
+  box-shadow: var(--shadow-3);
+}
+
+.stable-lanyard-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Scroll cue */
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(1rem, 3vh, 2rem);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  translate: -50% 0;
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.scroll-cue svg {
+  animation: bob 1.8s var(--ease-in-out) infinite;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    align-items: start;
+    padding-top: 84px;
+  }
+  .hero-grid {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    gap: 0;
+  }
+  .hero-copy {
+    order: 2;
+    padding-block: var(--space-5) var(--space-9);
+  }
+  .hero-stage {
+    order: 1;
+    height: 56svh;
+    min-height: 440px;
+    max-height: 600px;
+    margin-inline: calc(-1 * var(--gutter));
+  }
+  .hero-title {
+    font-size: var(--step-5);
+  }
+  .scroll-cue {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .hero-stage {
+    height: 50svh;
+    min-height: 380px;
+  }
+  .stable-lanyard-assembly {
+    transform: scale(0.75);
+    transform-origin: top center;
+  }
+}

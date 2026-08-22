@@ -9,7 +9,7 @@ const ThreeLanyard = dynamic(() => import("./ThreeLanyard"), {
   loading: () => <div className="three-lanyard three-lanyard-loading" aria-label="Loading interactive lanyard" />,
 });
 
-class LanyardErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+class LanyardErrorBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { failed: boolean }> {
   state = { failed: false };
 
   static getDerivedStateFromError() {
@@ -21,11 +21,20 @@ class LanyardErrorBoundary extends Component<{ children: ReactNode }, { failed: 
   }
 
   render() {
-    return this.state.failed ? <StableLanyard /> : this.props.children;
+    return this.state.failed ? this.props.fallback : this.props.children;
   }
 }
 
-export function PhysicsLanyard() {
+type PhysicsLanyardProps = {
+  /** When false the card is held off-stage; when true it drops into frame under gravity. */
+  released?: boolean;
+};
+
+export function PhysicsLanyard({ released = true }: PhysicsLanyardProps) {
   // A cached or interrupted 3D asset must never take down the complete portfolio.
-  return <LanyardErrorBoundary><ThreeLanyard /></LanyardErrorBoundary>;
+  return (
+    <LanyardErrorBoundary fallback={<StableLanyard released={released} />}>
+      <ThreeLanyard released={released} />
+    </LanyardErrorBoundary>
+  );
 }

@@ -9,13 +9,13 @@ import { BallCollider, CuboidCollider, Physics, RigidBody, type RigidBodyProps, 
 import { MeshLineGeometry, MeshLineMaterial } from "meshline";
 import * as THREE from "three";
 
-// GitHub Pages serves this project from /lanyard-portfolio rather than the
-// domain root. Keep public assets under that same base path in production.
-const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-const publicAsset = (path: string) => `${publicBasePath}${path}`;
-const cardGLB = publicAsset("/card.glb");
-const lanyardTexture = publicAsset("/evolyst-lanyard-texture.png");
-const cardTexturePath = publicAsset("/card-base-dark.png");
+import { LANYARD_ASSETS } from "./preload";
+
+// Asset URLs are shared with the gate's preloader, so the cache is already
+// warm by the time this scene mounts.
+const cardGLB = LANYARD_ASSETS.card;
+const lanyardTexture = LANYARD_ASSETS.strap;
+const cardTexturePath = LANYARD_ASSETS.cardTexture;
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
@@ -31,11 +31,14 @@ export default function ThreeLanyard({
   gravity = [0, -40, 0],
   fov = 20,
   containerClassName = "three-lanyard",
+  released = true,
 }: {
   position?: [number, number, number];
   gravity?: [number, number, number];
   fov?: number;
   containerClassName?: string;
+  /** Physics stay paused until this is true, so the card drops exactly when the story calls for it. */
+  released?: boolean;
 }) {
   const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.innerWidth < 768);
   const [canvasKey, setCanvasKey] = useState(0);
@@ -60,7 +63,7 @@ export default function ThreeLanyard({
     }, { once: true });
   }, []);
 
-  return <div className={containerClassName} aria-label="Interactive 3D lanyard. Drag the card to move it.">
+  return <div className={`${containerClassName} ${released ? "is-released" : ""}`} aria-label="Interactive 3D lanyard. Drag the card to move it.">
     <Canvas
       key={canvasKey}
       camera={{ position, fov }}
@@ -69,14 +72,14 @@ export default function ThreeLanyard({
       onCreated={handleCreated}
     >
       <ambientLight intensity={Math.PI} />
-      <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
+      <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60} paused={!released}>
         <Band isMobile={isMobile} />
       </Physics>
       <Environment blur={0.75}>
         <Lightformer intensity={2} color="white" position={[0, -1, 5]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
         <Lightformer intensity={3} color="white" position={[-1, -1, 1]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
         <Lightformer intensity={3} color="white" position={[1, 1, 1]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
-        <Lightformer intensity={10} color="white" position={[-10, 0, 14]} rotation={[0, Math.PI / 2, Math.PI / 3]} scale={[100, 10, 1]} />
+        <Lightformer intensity={7} color="white" position={[-10, 0, 14]} rotation={[0, Math.PI / 2, Math.PI / 3]} scale={[100, 10, 1]} />
       </Environment>
     </Canvas>
   </div>;
@@ -164,7 +167,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: { maxSpeed?: nu
           onPointerDown={(event: any) => { event.target.setPointerCapture(event.pointerId); drag(new THREE.Vector3().copy(event.point).sub(vec.copy(card.current.translation()))); }}
         >
           <mesh geometry={nodes.card.geometry}>
-            <meshPhysicalMaterial map={cardTexture} map-anisotropy={16} clearcoat={isMobile ? 0 : 1} clearcoatRoughness={0.15} roughness={0.9} metalness={0.8} />
+            <meshPhysicalMaterial map={cardTexture} map-anisotropy={16} clearcoat={isMobile ? 0 : 1} clearcoatRoughness={0.15} roughness={0.85} metalness={0.6} />
           </mesh>
           <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
           <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
