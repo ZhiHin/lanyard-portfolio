@@ -1,0 +1,125 @@
+/* ------------------------------------------------------------------
+   Motion — keyframes and the reduced-motion backstop
+   Components animate transform + opacity only.
+   ------------------------------------------------------------------ */
+
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(4%, -6%, 0) scale(1.06);
+  }
+  66% {
+    transform: translate3d(-5%, 4%, 0) scale(0.96);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-reverse {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dialog-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Decorative blob — used by the gate and several acts */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  animation: drift 18s var(--ease-in-out) infinite;
+  will-change: transform;
+}
+
+.blob-indigo {
+  background: radial-gradient(circle at 30% 30%, rgba(79, 70, 229, 0.38), rgba(79, 70, 229, 0) 70%);
+}
+
+.blob-coral {
+  background: radial-gradient(circle at 60% 40%, rgba(255, 122, 69, 0.36), rgba(255, 122, 69, 0) 70%);
+  animation-duration: 24s;
+  animation-direction: reverse;
+}
+
+.blob-mint {
+  background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.28), rgba(16, 185, 129, 0) 70%);
+  animation-duration: 21s;
+}
+
+/* Reduced-motion backstop — components also honour this in JS */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .blob {
+    animation: none;
+  }
+}

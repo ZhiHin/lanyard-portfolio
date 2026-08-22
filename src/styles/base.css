@@ -1,0 +1,316 @@
+/* ------------------------------------------------------------------
+   Base — reset, page ground, typography, shared utilities
+   ------------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--porcelain);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  color: var(--ink);
+  background: var(--porcelain);
+  font-family: var(--font-ui);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.is-locked {
+  overflow: hidden;
+}
+
+/* Grain overlay — static texture, no animation cost */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: var(--grain);
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+::selection {
+  color: var(--paper);
+  background: var(--indigo);
+}
+
+:focus-visible {
+  outline: 2px solid var(--indigo);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Layout shell */
+.shell {
+  width: var(--shell);
+  margin-inline: auto;
+}
+
+.act {
+  position: relative;
+  padding-block: var(--section-gap);
+}
+
+.act-head {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.act-head h2 {
+  font-size: var(--step-4);
+  max-width: 16ch;
+}
+
+.act-head .lead {
+  max-width: 52ch;
+  color: var(--muted);
+  font-size: var(--step-1);
+  line-height: 1.55;
+}
+
+@media (min-width: 901px) {
+  .act-head {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+  }
+  .act-head .lead {
+    text-align: right;
+    justify-self: end;
+    max-width: 38ch;
+  }
+}
+
+/* Labels */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--indigo);
+}
+
+.eyebrow-number {
+  color: var(--indigo);
+  font-variant-numeric: tabular-nums;
+}
+
+.accent {
+  color: var(--indigo);
+}
+
+.accent-warm {
+  color: var(--coral);
+}
+
+.hairline {
+  border: 0;
+  height: 1px;
+  background: var(--hairline);
+}
+
+/* Surfaces */
+.surface {
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+}
+
+/* Buttons */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 52px;
+  padding: 0 1.5rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: var(--step-0);
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  transition:
+    transform var(--dur-hover) var(--ease-out),
+    box-shadow var(--dur-hover) var(--ease-out),
+    background-color var(--dur-hover) var(--ease-out),
+    color var(--dur-hover) var(--ease-out);
+  will-change: transform;
+}
+
+.btn svg {
+  transition: transform var(--dur-hover) var(--ease-out);
+}
+
+.btn:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.btn-primary {
+  color: var(--paper);
+  background: var(--ink);
+  box-shadow: var(--shadow-2);
+}
+
+.btn-primary:hover {
+  background: var(--indigo);
+  box-shadow: var(--shadow-indigo);
+  transform: translateY(-2px);
+}
+
+.btn-accent {
+  color: var(--paper);
+  background: var(--indigo);
+  box-shadow: var(--shadow-indigo);
+}
+
+.btn-accent:hover {
+  background: var(--ink);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink-12);
+}
+
+.btn-ghost:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.text-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.text-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0.35);
+  transform-origin: left;
+  transition: transform 300ms var(--ease-out);
+}
+
+.text-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Magnetic — the existing Magnetic component writes these variables */
+.magnetic {
+  transform: translate(var(--magnetic-x, 0), var(--magnetic-y, 0));
+  transition: transform 260ms var(--ease-out);
+}
+
+/* Chips */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--hairline);
+  background: var(--paper);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* Visually hidden */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

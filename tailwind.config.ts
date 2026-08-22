@@ -1,11 +1,27 @@
 import type { Config } from "tailwindcss";
 
+// The design system lives in src/styles/tokens.css. Tailwind is kept for the
+// occasional utility; its preflight reset is disabled because base.css owns
+// the reset, and its theme reads the same custom properties so the two can
+// never drift apart.
 const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  corePlugins: { preflight: false },
   theme: {
     extend: {
-      colors: { ink: "#11110f", ivory: "#f6f3ec", gold: "#a78349" },
-      fontFamily: { sans: ["var(--font-manrope)", "sans-serif"], serif: ["var(--font-cormorant)", "serif"] },
+      colors: {
+        porcelain: "var(--porcelain)",
+        paper: "var(--paper)",
+        ink: "var(--ink)",
+        muted: "var(--muted)",
+        indigo: "var(--indigo)",
+        coral: "var(--coral)",
+        mint: "var(--mint)",
+      },
+      fontFamily: {
+        display: ["var(--font-display)", "sans-serif"],
+        ui: ["var(--font-ui)", "sans-serif"],
+      },
     },
   },
   plugins: [],
