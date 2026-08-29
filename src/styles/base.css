@@ -314,3 +314,37 @@ ul {
   white-space: nowrap;
   border: 0;
 }
+
+/* ------------------------------------------------------------------
+   Scrollbars — slim, on-palette, instead of the browser default
+   ------------------------------------------------------------------ */
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(20, 20, 26, 0.28) transparent;
+  scrollbar-gutter: stable;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--porcelain);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(20, 20, 26, 0.28);
+  border: 3px solid var(--porcelain);
+  border-radius: var(--radius-pill);
+  transition: background-color var(--dur-hover) var(--ease-out);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--indigo);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--porcelain);
+}

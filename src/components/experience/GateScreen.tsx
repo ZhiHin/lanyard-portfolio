@@ -58,21 +58,26 @@ export function GateScreen({ onEnter, onSkip, leaving }: GateScreenProps) {
 
       <div className="gate-content">
         <motion.p className="gate-name" {...fade(0.9)}>
-          {personal.name} <span aria-hidden="true">·</span> {personal.role}
+          <span className="gate-name-part">{personal.role}</span>
+          <span className="gate-name-dot" aria-hidden="true">·</span>
+          <span className="gate-name-part">{personal.location}</span>
         </motion.p>
 
         <SplitText
           as="h1"
           className="gate-question"
-          text="Do you want to know me?"
+          text={`${personal.name}.`}
           trigger="mount"
           delay={1.1}
           stagger={0.09}
-          highlight={[{ index: 4, className: "accent" }]}
+          highlight={[
+            { index: 1, className: "accent" },
+            { index: 2, className: "accent" },
+          ]}
         />
 
         <motion.p className="gate-lead" {...fade(1.7)}>
-          There&apos;s something missing from this lanyard. Come and find out what.
+          {personal.summary}
         </motion.p>
 
         <motion.div className="gate-actions" {...fade(1.9)}>
@@ -86,7 +91,7 @@ export function GateScreen({ onEnter, onSkip, leaving }: GateScreenProps) {
       </div>
 
       <motion.p className="gate-footnote" aria-hidden="true" {...fade(2.3)}>
-        <span>{personal.location}</span>
+        <span>{personal.initials} · Software engineer</span>
         <span>Portfolio · 2026</span>
       </motion.p>
     </section>

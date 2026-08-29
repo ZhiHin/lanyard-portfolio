@@ -15,8 +15,8 @@ export function ProjectCaseStudyDialog({ project, onClose }: { project: Project;
 
   return createPortal(
     <div className="case-study-dialog" role="dialog" aria-modal="true" aria-labelledby="case-study-title" onMouseDown={onClose}>
+      <button className="case-study-close" type="button" onClick={onClose} aria-label="Close case study"><X size={20} /></button>
       <article className="case-study-dialog-content" onMouseDown={(event) => event.stopPropagation()}>
-        <button className="case-study-close" type="button" onClick={onClose} aria-label="Close case study"><X size={20} /></button>
         <header className="case-study-header">
           <p>{project.number} / {project.category} <span>{project.year}</span></p>
           <h2 id="case-study-title">{project.title}</h2>

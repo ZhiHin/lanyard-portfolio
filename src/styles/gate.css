@@ -86,8 +86,10 @@
 
 .gate-name {
   display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 4px 10px;
   color: var(--muted);
   font-size: var(--step--1);
   font-weight: 600;
@@ -95,8 +97,12 @@
   text-transform: uppercase;
 }
 
-.gate-name span {
+.gate-name-dot {
   color: var(--indigo);
+}
+
+.gate-name-part {
+  white-space: nowrap;
 }
 
 .gate-question {
@@ -145,6 +151,9 @@
 }
 
 @media (max-width: 620px) {
+  .gate-name-dot {
+    display: none;
+  }
   .gate-content {
     padding-top: clamp(90px, 16vh, 140px);
   }
