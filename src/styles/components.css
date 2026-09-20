@@ -432,6 +432,12 @@
   position: sticky;
 }
 
+.sticky-stack.is-static .sticky-item {
+  position: relative;
+  top: auto;
+  padding-bottom: 0;
+}
+
 @media (max-width: 900px) {
   .sticky-stack:not(.is-static) .sticky-item {
     padding-bottom: max(0px, calc(100svh - var(--sticky-item-top) - var(--sticky-step)));

@@ -92,7 +92,7 @@ export function WorkSection() {
 
         <StickyStack className="work-stack" enabled={false} top={104} step={16}>
           {cards.map((card, index) => (
-            <article className={`work-card surface ${index % 2 ? "is-reverse" : ""}`} key={card.key} style={{ zIndex: index + 1 }}>
+            <article className={`work-card surface ${index % 2 ? "is-reverse" : ""}`} key={card.key}>
               <div className="work-card-media">{galleryFor(card.number, card.accent)}</div>
               <div className="work-card-copy">
                 <p className="work-number">
