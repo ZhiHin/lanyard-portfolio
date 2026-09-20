@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Children, type ReactNode, useRef } from "react";
+import { Children, type CSSProperties, type ReactNode, useRef } from "react";
 import { useMotionPreferences } from "./useMotionPreferences";
 
 type StickyStackProps = {
@@ -54,7 +54,17 @@ function StickyItem({ children, index, total, top, step }: { children: ReactNode
   const opacity = useTransform(scrollYProgress, [0, 0.85, 1], [1, 1, isLast ? 1 : 0.6]);
 
   return (
-    <div ref={ref} className="sticky-item" style={{ top: top + index * step }}>
+    <div
+      ref={ref}
+      className="sticky-item"
+      style={
+        {
+          top: top + index * step,
+          "--sticky-item-top": `${top + index * step}px`,
+          "--sticky-step": `${step}px`,
+        } as CSSProperties
+      }
+    >
       <motion.div className="sticky-inner" style={{ scale, opacity, transformOrigin: "center top" }}>
         {children}
       </motion.div>
