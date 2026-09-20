@@ -7,6 +7,7 @@ import { useMotionPreferences } from "./useMotionPreferences";
 type StickyStackProps = {
   children: ReactNode;
   className?: string;
+  enabled?: boolean;
   /** Pixel offset from the viewport top where cards pin. */
   top?: number;
   /** Extra pixels each successive card sits below the previous, so the stack edge is visible. */
@@ -18,11 +19,11 @@ type StickyStackProps = {
  * scales down slightly as it is covered so the stack reads as depth.
  * Falls back to a plain list when motion is reduced.
  */
-export function StickyStack({ children, className = "", top = 96, step = 14 }: StickyStackProps) {
+export function StickyStack({ children, className = "", enabled = true, top = 96, step = 14 }: StickyStackProps) {
   const { reduced } = useMotionPreferences();
   const items = Children.toArray(children);
 
-  if (reduced) {
+  if (!enabled || reduced) {
     return (
       <div className={`sticky-stack is-static ${className}`}>
         {items.map((child, index) => (
