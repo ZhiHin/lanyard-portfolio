@@ -347,48 +347,51 @@
 /* Marquee */
 .marquee {
   position: relative;
+  width: 100%;
   overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
 }
 
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee linear infinite;
+
+  animation-name: marquee-left;
+  animation-duration: var(--marquee-duration, 38s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
   will-change: transform;
 }
 
 .marquee.is-reverse .marquee-track {
-  animation-name: marquee-reverse;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .marquee:hover .marquee-track {
-    animation-play-state: paused;
-  }
+  animation-name: marquee-right;
 }
 
 .marquee-row {
   display: flex;
   flex-shrink: 0;
   gap: 12px;
-  padding-right: 12px;
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-    flex-wrap: wrap;
-    width: auto;
-  }
-  .marquee-row[aria-hidden="true"] {
-    display: none;
-  }
-  .marquee {
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
+  margin: 0;
+  padding: 0 12px 0 0;
+
+  list-style: none;
 }
 
 /* TiltCard */

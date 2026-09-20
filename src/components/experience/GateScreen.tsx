@@ -66,7 +66,7 @@ export function GateScreen({ onEnter, onSkip, leaving }: GateScreenProps) {
         <SplitText
           as="h1"
           className="gate-question"
-          text={`${personal.name}.`}
+          text={`${personal.name}`}
           trigger="mount"
           delay={1.1}
           stagger={0.09}

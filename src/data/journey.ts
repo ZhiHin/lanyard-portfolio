@@ -18,38 +18,38 @@ export type Milestone = {
 
 export const journey: Milestone[] = [
   {
-    year: "2022", // TODO: confirm real date
-    tag: "The beginning",
-    title: "Wrote my first real program",
-    org: "Self-taught", // TODO: confirm — school, bootcamp or self-taught?
-    body: "The moment a few lines of code turned into something that worked on screen. I was hooked on building things people could actually use.",
+    year: "2021", 
+    tag: "The beginning - Education",
+    title: "Diploma in Computer Science",
+    org: "Tunku Abdul Rahman University of Management and Technology (TAR UMT)",
+    body: "My first step into IT and programming. I started learning the fundamentals of coding, exploring different technologies, and discovering what I could build with them.",
   },
   {
-    year: "2023", // TODO: confirm real date
+    year: "2023",
     tag: "Education",
-    title: "Studied software engineering",
-    org: "Kuala Lumpur", // TODO: replace with institution name
-    body: "Built the foundations: data structures, databases, web architecture, and the habit of thinking about the person on the other side of the screen.",
+    title: "Degree in Software Engineering",
+    org: "Tunku Abdul Rahman University of Management and Technology (TAR UMT)",
+    body: "I began exploring software engineering beyond coding — learning about architecture, system design, databases, development methodologies, and the principles behind building reliable and maintainable software.",
   },
   {
     year: "2025",
-    tag: "Enterprise",
-    title: "Shipped the Business Admin Dashboard",
-    org: "Angular 22 · Supabase",
-    body: "A role-aware administration platform for users, products, sales and reporting. My first deep dive into clean enterprise architecture.",
+    tag: "Internship",
+    title: "Software Engineer Intern",
+    org: "Theta Service Partner Sdn Bhd",
+    body: "Working in a real software company gave me a new perspective on what it means to be a software engineer. I started experiencing the differences between studying and working, from collaborating with a team to dealing with real requirements, systems, and challenges. This experience helped me grow both technically and professionally.",
   },
   {
     year: "2026",
-    tag: "Product",
-    title: "Built platforms for travel and dining",
-    org: "Next.js · PostgreSQL",
-    body: "A secure hotel booking ecosystem and a modular Restaurant Operating System with a Smart Bill Engine for group dining.",
+    tag: "Full-time",
+    title: "Software Engineer",
+    org: "Theta Service Partner Sdn Bhd",
+    body: "From learning the fundamentals to working with real systems, I’m now growing into the engineer I want to become. As a full-time Software Engineer, I develop features, solve bugs, review code, and guide interns. Every problem I face pushes me to think more logically, solve problems more effectively, and become a better engineer.",
   },
   {
     year: "Now",
-    tag: "Today",
-    title: "Building useful things",
-    org: "Kuala Lumpur, Malaysia",
-    body: "Open to software engineering opportunities and meaningful collaborations. Still chasing that first-program feeling on every project.",
+    tag: "Founder",
+    title: "Where Ideas Take Shape",
+    org: "Evolyst Studio",
+    body: "A space where ideas become projects. Evolyst Studio started as a small group exploring development, design, and new ideas together. From landing pages and websites to custom solutions, each project is an opportunity to build something useful, experiment with new approaches, and grow through the process.",
   },
 ];

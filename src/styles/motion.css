@@ -18,19 +18,21 @@
   }
 }
 
-@keyframes marquee {
+@keyframes marquee-left {
   from {
     transform: translate3d(0, 0, 0);
   }
+
   to {
     transform: translate3d(-50%, 0, 0);
   }
 }
 
-@keyframes marquee-reverse {
+@keyframes marquee-right {
   from {
     transform: translate3d(-50%, 0, 0);
   }
+
   to {
     transform: translate3d(0, 0, 0);
   }
@@ -108,17 +110,8 @@
   animation-duration: 21s;
 }
 
-/* Reduced-motion backstop — components also honour this in JS */
+/* Reduced-motion backstop */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
   .blob {
     animation: none;
   }

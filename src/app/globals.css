@@ -14,3 +14,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Hide browser scrollbar */
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}

@@ -60,7 +60,9 @@ type Card = {
 };
 
 /** Flatten projects and their companions into one ordered stack. */
-const cards: Card[] = projects.flatMap((project) => {
+const cards: Card[] = projects
+  .filter((project) => project.number !== "04")
+  .flatMap((project) => {
   const base: Card = { key: project.number, ...project, project };
   if (!project.companion) return [base];
   const companion: Card = { key: project.companion.number, ...project.companion, accent: project.accent, githubUrl: project.githubUrl };

@@ -42,7 +42,7 @@ export function HeroSection({ cardReleased }: HeroSectionProps) {
             <span className="hero-name">
               <SplitText
                 as="span"
-                text={personal.firstName + "."}
+                text={personal.firstName}
                 trigger="mount"
                 play={cardReleased}
                 delay={0.55}
